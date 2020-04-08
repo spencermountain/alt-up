@@ -1,0 +1,54 @@
+{
+  "name": "alt-up",
+  "displayName": "alt-up",
+  "description": "navigate vertically",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.35.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spencermountain/alt-up.git"
+  },
+  "activationEvents": [
+    "onCommand:extension.alt-up",
+    "onCommand:extension.alt-down",
+    "onCommand:extension.alt-go-left",
+    "onCommand:extension.alt-go-right"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.alt-up",
+        "title": "Alt-Up"
+      },
+      {
+        "command": "extension.alt-down",
+        "title": "Alt-Down"
+      },
+      {
+        "command": "extension.alt-over",
+        "title": "Alt-Over"
+      }
+    ]
+  },
+  "icon": "Tree.png",
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28",
+    "@types/node": "^10.12.21",
+    "@types/mocha": "^2.2.42"
+  },
+  "dependencies": {
+    "acorn": "^7.1.1",
+    "acorn-umd": "^0.4.0"
+  }
+}
