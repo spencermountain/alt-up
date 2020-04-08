@@ -2,14 +2,12 @@ const vscode = require('vscode')
 const path = require('path')
 const fs = require('fs')
 const dropDown = require('../lib/dropDown')
+const getFiles = require('../lib/getFiles')
+const getFolders = require('../lib/getFolders')
 
-const getFolders = function (dir) {
-  let files = fs.readdirSync(dir)
-  let dirs = files.filter((file) => {
-    return fs.lstatSync(path.join(dir, file)).isFile() === false
-  })
-  dirs = dirs.map((f) => dir + '/' + f)
-  return dirs
+const ignore = {
+  node_modules: true,
+  '.git': true,
 }
 
 // alt-down
@@ -19,13 +17,34 @@ let altDown = function () {
   let dir = path.dirname(ourFile)
 
   let folders = getFolders(dir)
-  let files = folders.map((f) => path.join(dir, f, '/index' + ext))
-  files = files.filter((f) => fs.existsSync(f))
+  // remove crud folders
+  folders = folders.filter((dir) => {
+    return dir.startsWith('.') === false && ignore.hasOwnProperty(dir) === false
+  })
   if (folders.length === 0) {
     vscode.window.setStatusBarMessage(`Reached bottom.`, 3000)
     return
   }
-  dropDown(files, ourFile)
+  // find most-appropriate file for each folder
+  let found = folders.map((dir) => {
+    let files = getFiles(dir)
+    // let name = path.basename(path.dirname(dir))
+    let file = null
+    // accept only file
+    if (!file && files.length === 1) {
+      file = files[0]
+    }
+    // find index file
+    file = file || files.find((f) => path.parse(f).name === 'index')
+    // find first matching extension
+    file = file || files.find((f) => path.parse(f).ext === ext)
+
+    return file
+  })
+  found = found.filter((f) => f)
+
+  console.log(found)
+  dropDown(found, ourFile)
 }
 
 module.exports = altDown

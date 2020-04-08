@@ -16,8 +16,8 @@
   "activationEvents": [
     "onCommand:extension.alt-up",
     "onCommand:extension.alt-down",
-    "onCommand:extension.alt-go-left",
-    "onCommand:extension.alt-go-right"
+    "onCommand:extension.alt-file-left",
+    "onCommand:extension.alt-file-right"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -31,8 +31,12 @@
         "title": "Alt-Down"
       },
       {
-        "command": "extension.alt-over",
-        "title": "Alt-Over"
+        "command": "extension.alt-file-right",
+        "title": "Alt-File-Right"
+      },
+      {
+        "command": "extension.alt-file-left",
+        "title": "Alt-File-Left"
       }
     ]
   },
@@ -42,13 +46,10 @@
     "test": "node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "typescript": "^3.3.1",
-    "vscode": "^1.1.28",
+    "@types/mocha": "^2.2.42",
     "@types/node": "^10.12.21",
-    "@types/mocha": "^2.2.42"
+    "typescript": "^3.3.1",
+    "vscode": "1.1.36"
   },
-  "dependencies": {
-    "acorn": "^7.1.1",
-    "acorn-umd": "^0.4.0"
-  }
+  "dependencies": {}
 }

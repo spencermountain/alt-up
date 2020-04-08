@@ -1,15 +1,27 @@
 const vscode = require('vscode')
 const altDown = require('./src/altDown')
 const altUp = require('./src/altUp')
-const altOver = require('./src/altOver')
+const fileRight = require('./src/fileRight')
+const fileLeft = require('./src/fileLeft')
 
 function activate(context) {
   let up = vscode.commands.registerCommand('extension.alt-up', altUp)
-  let down = vscode.commands.registerCommand('extension.alt-down', altDown)
-  let over = vscode.commands.registerCommand('extension.alt-over', altOver)
   context.subscriptions.push(up)
+
+  let down = vscode.commands.registerCommand('extension.alt-down', altDown)
   context.subscriptions.push(down)
-  context.subscriptions.push(over)
+
+  let right = vscode.commands.registerCommand(
+    'extension.alt-file-right',
+    fileRight
+  )
+  context.subscriptions.push(right)
+
+  let left = vscode.commands.registerCommand(
+    'extension.alt-file-left',
+    fileLeft
+  )
+  context.subscriptions.push(left)
 }
 exports.activate = activate
 

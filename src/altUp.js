@@ -32,7 +32,6 @@ let altUp = function () {
   // just one file?
   let files = getFiles(parent)
   console.log('looking in ' + parent)
-  console.log('found ', files)
   if (files.length === 1) {
     openFile(files[0])
     return

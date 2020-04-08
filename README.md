@@ -29,13 +29,14 @@ This is a vsCode extension to implement this, in an intuitive way.
 * (does not go above workspace root)
 
 #### Alt-down
-* looks for files in child directories with the same extension
+* looks for files in child directories 
+* looks for `index` files with the same extension
 * if there are choices, creates a dropdown to choose
 
-
-- **Alt-down** - looks for `./foo/index` files, offers dropdown if multiple
-- **Alt-go-left** - looks for sibling files
-- **Alt-go-right** - looks for sibling files
+#### Alt-file-left
+* looks for sibling files before current one
+#### Alt-file-right
+* looks for sibling files before after one
 
 The extension was build with this mental-model for navigation,
 ![file-tree](./tree-simple.png)
@@ -57,11 +58,11 @@ it may make sense to 'rotate' your keybindings 90deg:
   },
   {
     "key": "ctrl+up",
-    "command": "extension.alt-neighbor-left"
+    "command": "extension.alt-file-left"
   },
   {
     "key": "ctrl+right",
-    "command": "extension.alt-neighbor-right"
+    "command": "extension.alt-file-right"
   }
 ]
 ```
